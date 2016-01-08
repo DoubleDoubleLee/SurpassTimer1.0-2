@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CCZSelectSeatCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中影国际影城昌平永旺店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nC-jk-pax">
+                        <rect key="frame" x="8" y="8" width="187" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="187" id="Cun-ph-2vu"/>
+                            <constraint firstAttribute="height" constant="21" id="R2l-Tw-c1X"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="北京昌平区北清路1号永旺国际商城3楼3.7Km" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSY-M0-pb8">
+                        <rect key="frame" x="8" y="37" width="235" height="55"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPk-uz-dMU">
+                        <rect key="frame" x="251" y="56" width="61" height="30"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="60x-v8-3c8"/>
+                            <constraint firstAttribute="width" constant="61" id="e5x-HN-txd"/>
+                        </constraints>
+                        <state key="normal" title="购票" backgroundImage="icon_button_buy_ticket"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Alt-jO-VKs">
+                        <rect key="frame" x="297" y="14" width="17" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="7fJ-u4-EsN"/>
+                            <constraint firstAttribute="width" constant="17" id="oMy-JW-PUq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="1" green="0.53532320766726382" blue="0.099284116317897353" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥37" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tM-Ne-9Kp">
+                        <rect key="frame" x="258" y="13" width="37" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="37" id="6We-H1-aJ4"/>
+                            <constraint firstAttribute="height" constant="21" id="iXI-VV-QXB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.58385398249268983" blue="0.14814279047332268" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="0nC-jk-pax" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="3dU-Vz-2lG"/>
+                    <constraint firstItem="GPk-uz-dMU" firstAttribute="top" secondItem="7tM-Ne-9Kp" secondAttribute="bottom" constant="22" id="49K-n4-rgO"/>
+                    <constraint firstItem="GPk-uz-dMU" firstAttribute="top" secondItem="Alt-jO-VKs" secondAttribute="bottom" constant="21" id="HLv-SB-4DZ"/>
+                    <constraint firstAttribute="bottom" secondItem="zSY-M0-pb8" secondAttribute="bottom" constant="8" id="Jfp-Nb-zqg"/>
+                    <constraint firstItem="7tM-Ne-9Kp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="MNe-H5-KKY"/>
+                    <constraint firstItem="zSY-M0-pb8" firstAttribute="top" secondItem="0nC-jk-pax" secondAttribute="bottom" constant="8" id="Vif-mG-Xhr"/>
+                    <constraint firstAttribute="bottom" secondItem="GPk-uz-dMU" secondAttribute="bottom" constant="13.5" id="W9B-eC-7ng"/>
+                    <constraint firstAttribute="trailing" secondItem="GPk-uz-dMU" secondAttribute="trailing" constant="8" id="XEc-In-zrz"/>
+                    <constraint firstAttribute="trailing" secondItem="Alt-jO-VKs" secondAttribute="trailing" constant="6" id="cbw-d6-nrR"/>
+                    <constraint firstItem="Alt-jO-VKs" firstAttribute="leading" secondItem="7tM-Ne-9Kp" secondAttribute="trailing" constant="2" id="gbH-rg-5O0"/>
+                    <constraint firstItem="GPk-uz-dMU" firstAttribute="top" secondItem="Alt-jO-VKs" secondAttribute="bottom" constant="21" id="nPh-rc-Fik"/>
+                    <constraint firstItem="GPk-uz-dMU" firstAttribute="leading" secondItem="zSY-M0-pb8" secondAttribute="trailing" constant="8" id="q5M-XF-s2G"/>
+                    <constraint firstItem="Alt-jO-VKs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="slg-xx-Gzg"/>
+                    <constraint firstItem="0nC-jk-pax" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="t2e-k6-DSk"/>
+                    <constraint firstItem="zSY-M0-pb8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="x5z-pU-kQ9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <connections>
+                <outlet property="address" destination="zSY-M0-pb8" id="rsn-TT-1fE"/>
+                <outlet property="button" destination="GPk-uz-dMU" id="boo-6B-SU3"/>
+                <outlet property="cinameName" destination="0nC-jk-pax" id="YfO-oB-dXH"/>
+                <outlet property="minPrice" destination="7tM-Ne-9Kp" id="Hxd-Qt-X2l"/>
+            </connections>
+            <point key="canvasLocation" x="604" y="325"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_button_buy_ticket" width="554" height="2"/>
+    </resources>
+</document>

@@ -1,0 +1,350 @@
+//
+//  LYNewsViewController.m
+//  SurpassTimer
+//
+//  Created by qianfeng on 15/11/25.
+//  Copyright © 2015年 L-J-C. All rights reserved.
+//
+
+//头
+#define HeardUrl @"http://api.m.mtime.cn/PageSubArea/GetRecommendationIndexInfo.api"
+//cell数据
+#define LYNewsUrl @"http://api.m.mtime.cn/News/NewsList.api?pageIndex="
+#import "LYNewsViewController.h"
+#import "LJCSHDownload.h"
+#import "UIImageView+WebCache.h"
+#import "LYNewsModle.h"
+#import "LYNewsTableViewCell.h"
+#import "LYNewsTableCell.h"
+#import "LYFindModel.h"
+#import "FindViewController.h"
+#import "LYNewsnextController.h"
+#import "LYNextphotoscontroller.h"
+#import "MJRefresh.h"
+#import "LYNewsNextModel.h"
+@interface LYNewsViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+{
+    NSMutableArray *_dataSource;
+    UITableView *_tableview;
+    NSMutableArray *_ImagesARR;
+    //MJRefreshHeader
+    MJRefreshFooterView * footer;
+    MJRefreshHeaderView * header;
+    
+    UIView *view;
+    int _index;
+    NSString *_path;
+    
+    NSString *titleID;
+}
+
+@end
+
+@implementation LYNewsViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+self.Titles=@"news";
+    
+   [self createUI];
+//
+  //  NSDate * t =[NSDate date];
+    _index=1;
+   // self.view.backgroundColor=[UIColor colorWithRed:0.500 green:0.087 blue:0.144 alpha:1.000];
+    [self refreshPath];
+   [self Download];
+    
+    [self DownLoad1];//头视图 下载
+    [self addSubview];//刷新
+}
+/**
+ *  刷新
+ */
+-(void)addSubview
+{
+
+    header=[MJRefreshHeaderView header];
+    footer=[MJRefreshFooterView footer];
+    header.delegate=self;
+    footer.delegate=self;
+    
+    header.scrollView=_tableview;
+    footer.scrollView=_tableview;
+}
+-(void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+//    if (refreshView==header) {
+//        //下拉刷新
+//        [self Download];
+//    }
+    if (refreshView==footer) {
+        
+        _index++;
+        [self Download];
+    }
+}
+
+
+-(void)createUI
+{
+    //_Newss=[[NSMutableArray alloc]init];
+    _dataSource=[[NSMutableArray alloc]init];
+    _ImagesARR=[[NSMutableArray alloc]init];
+    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, K_MainScreenWidth, K_MainScreenHeight-100)];
+    _tableview.delegate=self;
+    _tableview.dataSource=self;
+    [self.view addSubview:_tableview];
+}
+-(void)DownLoad1
+{
+    
+    
+    [LJCSHDownload downloadDataWithType:LJCDownloadTypeGet Path:HeardUrl parameters:nil sucess:^(NSData *data) {
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        //     NSDictionary *dict=dic[当前子视图管理器.titles];
+        
+        //self.childViewControllers[0]
+        //NSLog(@"%@",[self.childViewControllers[0]].titles);
+        LYFindModel *model=[[LYFindModel alloc]init];
+        
+        [model setValuesForKeysWithDictionary:dic];
+        
+        NSDictionary *dict=dic[@"news"];
+        view=[[UIView alloc]initWithFrame:CGRectMake(0, 64, K_MainScreenWidth, 286)];
+        
+        _tableview.tableHeaderView=view;
+          titleID=dict[@"id"];
+        
+    
+        UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, K_MainScreenWidth, 276)];
+        [imageview sd_setImageWithURL:[NSURL URLWithString:dict[@"imageUrl"]]];
+        UILabel *lables=[[UILabel alloc]initWithFrame:CGRectMake(0, 230-45, K_MainScreenWidth, 45)];
+        lables.text=dict[@"title"];
+        lables.backgroundColor=[UIColor colorWithRed:0.040 green:0.084 blue:0.139 alpha:0.500];
+        lables.textAlignment=NSTextAlignmentCenter;
+        lables.textColor=[UIColor whiteColor];
+        [imageview addSubview:lables];
+        
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
+        [view addGestureRecognizer:tap];
+        
+        
+        [view addSubview:imageview];
+        
+     
+        
+        
+         UIButton *button1=[UIButton buttonWithType:UIButtonTypeSystem];
+        UIImage *image1=[[UIImage imageNamed:@"内地"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        
+        
+        [button1 setImage:image1 forState:UIControlStateNormal];
+        button1.frame=CGRectMake(0, 230, K_MainScreenWidth/2, 60);
+        [button1 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        button1.tag=101;
+        [view addSubview:button1];
+        
+        
+
+
+        
+        
+        
+        UIButton *button2=[UIButton buttonWithType:UIButtonTypeSystem];
+        button2.frame=CGRectMake(K_MainScreenWidth/2, 230, K_MainScreenWidth/2, 60);
+        UIImage *image2=[[UIImage imageNamed:@"全球"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [button2 setImage:image2 forState:UIControlStateNormal];
+        [button2 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        button2.tag=102;
+        [view addSubview:button2];
+        UIImageView *imagetiao=[[UIImageView alloc]initWithFrame:CGRectMake(5, 290, K_MainScreenWidth, 1)];
+        imagetiao.image=[UIImage imageNamed:@"xiantiao"];
+        [view addSubview:imagetiao];
+        UIImageView *shutiao=[[UIImageView alloc]initWithFrame:CGRectMake(K_MainScreenWidth/2, 230, 1, 60)];
+        shutiao.backgroundColor=[UIColor grayColor];
+//        imagetiao.image=[UIImage imageNamed:@"shutiao"];
+        view.tag=10010;
+        [view addSubview:shutiao];
+
+        
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
+   
+    
+}
+-(void)tapClick:(UITapGestureRecognizer *)tap
+{
+
+    [LJCSHDownload downloadDataWithType:LJCDownloadTypeGet Path:HeardUrl parameters:nil sucess:^(NSData *data) {
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSDictionary *dict=dic[@"news"];
+        LYNewsnextController *vc=[[LYNewsnextController alloc]init];
+        
+        vc.LYid=dict[@"newsID"];
+        // NSLog(@"%@",titleID);
+        [self.navigationController pushViewController:vc animated:NO];
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
+
+}
+-(void)buttonClick:(UIButton *)btn
+{
+    if (btn.tag==101) {
+        NSLog(@"第一个按钮");
+    }else if (btn.tag==102){
+        NSLog(@"第二个按钮");
+    }
+}
+-(void)refreshPath
+{
+    NSString *Str1=[[NSString alloc]initWithFormat:LYNewsUrl];
+    NSString *STR=[Str1 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _path=[NSString stringWithFormat:@"%@%d",STR,_index];
+    
+    
+  
+}
+- (void) Download
+{
+    //NSString *path=[NSString stringWithFormat:LYNewsUrl];
+    
+    [LJCSHDownload downloadDataWithType:LJCDownloadTypeGet Path:_path parameters:nil sucess:^(NSData *data) {
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        for (NSDictionary *dict in dic[@"newsList"]) {
+            LYNewsModle *model=[[LYNewsModle alloc]init];
+            [model setValuesForKeysWithDictionary:dict];
+            if (!(dict[@"images"]==nil)) {
+                for (NSDictionary *dicc in dict[@"images"]) {
+                    model.url1=dicc[@"url1"];
+                   
+                   
+                }
+                [_ImagesARR addObject:model.images];
+            }
+                       [_dataSource addObject:model];
+        }
+        [_tableview reloadData];
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
+  
+
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _dataSource.count;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 110.0f;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//        LYNewsModle *model=_dataSource[indexPath.row];
+//    
+//    if (model.images!=nil) {
+//        LYNextphotoscontroller *photo=[[LYNextphotoscontroller alloc]init];
+//        photo.LYid=model.LYid;
+//        [self.navigationController pushViewController:photo animated:NO];
+//       
+//    }else{
+//    
+//        LYNewsnextController *vc=[[LYNewsnextController alloc]init];
+//        
+//        vc.LYid=model.LYid;
+//        //self.navigationItem.leftBarButtonItem=
+//        
+//        [self.navigationController pushViewController:vc animated:NO];
+//    }
+
+    
+    
+    LYNewsModle *model=_dataSource[indexPath.row];
+        LYNewsnextController *vc=[[LYNewsnextController alloc]init];
+        
+        vc.LYid=model.LYid;
+        //self.navigationItem.leftBarButtonItem=
+        
+        [self.navigationController pushViewController:vc animated:NO];
+    
+
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LYNewsModle *model=_dataSource[indexPath.row];
+  
+    if (model.url1==nil) {
+        LYNewsTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if (!cell) {
+            cell=[[LYNewsTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+        }
+        
+    [cell.cellImage  sd_setImageWithURL:[NSURL URLWithString:model.image] ];
+    cell.celltitle.text=model.title;
+    cell.celltitle2.text=model.title2;
+      //  cell.commentCount.text=model.commentCount;
+       // cell.cellTimes.text=model.
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }else {
+        
+        LYNewsTableCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        if (!cell) {
+            cell=[[[NSBundle mainBundle] loadNibNamed:@"LYNewsTableCell" owner:self options:nil] lastObject];
+        }
+        cell.cellLabel.text=model.title;
+          NSArray *arr=model.images;
+    NSDictionary *dic=arr[0];
+    [cell.cellImage1 sd_setImageWithURL:[NSURL URLWithString:dic[@"url1"]]];
+   
+    NSDictionary *dic1=arr[1];
+    [cell.cellImage2 sd_setImageWithURL:[NSURL URLWithString:dic1[@"url1"]]];
+        
+    NSDictionary *dic2=arr[2];
+    [cell.cellimage3 sd_setImageWithURL:[NSURL URLWithString:dic2[@"url1"]]];
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+}
+
+
+    
+}
+
+//-(void)example01
+//{
+//    __unsafe_unretained __typeof(self) weakSelf = self;
+//    
+//    // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        [weakSelf Download];
+//    }];
+//    
+//    // 马上进入刷新状态
+//    [self.tableView.mj_header beginRefreshing];
+//}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

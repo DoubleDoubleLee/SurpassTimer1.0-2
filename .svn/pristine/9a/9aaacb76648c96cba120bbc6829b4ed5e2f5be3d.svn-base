@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++7237",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++7237" : {
+
+    },
+    "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++5192" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++7237" : 0,
+    "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++5192" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A6E5C0FA-946B-4C27-843F-DE0834A1C92C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++7237" : "SurpassTimer1.0%202\/",
+    "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++5192" : "SurpassTimer1.0\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SurpassTimer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SurpassTimer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/10.17.10.23:9009\/soft1537",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++5192"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/10.17.10.23:9009\/soft1537",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "c0ebb1ea-8385-45b3-bac1-6397f90c17a7++7237"
+    }
+  ]
+}

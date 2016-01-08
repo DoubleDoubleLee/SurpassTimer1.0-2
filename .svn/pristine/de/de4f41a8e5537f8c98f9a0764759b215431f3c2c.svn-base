@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>免打扰模式</string>
+		<string>广播退订</string>
+		<string>通知管理</string>
+	</array>
+	<array>
+		<string>低流量模式</string>
+	</array>
+	<array>
+		<string>清除缓存</string>
+	</array>
+</array>
+</plist>

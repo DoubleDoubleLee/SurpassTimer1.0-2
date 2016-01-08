@@ -1,0 +1,42 @@
+//
+//  STHead.pch
+//  SurpassTimer
+//
+//  Created by qianfeng on 15/11/23.
+//  Copyright © 2015年 L-J-C. All rights reserved.
+//
+
+#ifndef STHead_pch
+#define STHead_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "ScrollButtonViewController.h"
+#import "OrekiNavigationBar.h"
+#import "OrekiButton.h"
+#import "MJRefresh.h"
+#import "HTTPTool.h"
+#import "ErWeiMaViewControllViewController.h"
+#import "SDCycleScrollView.h"
+#import "UIImageView+WebCache.h"
+#import "LJCSHDownload.h"
+#import "LocationViewController.h"
+
+
+
+#define K_MainScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define K_MainScreenHeight  [UIScreen mainScreen].bounds.size.height
+#define K_NavigationBarColor [UIColor colorWithRed:0.320 green:0.768 blue:1.000 alpha:1.000]
+
+//我的收藏表
+#define COLLECT_TABLE @"collect_table"
+//热映表
+#define MOVIE_1_TABLE @"movie_1_table"
+//上映表
+#define MOVIE_2_TABLE @"movie_2_table"
+
+
+
+#endif /* STHead_pch */
